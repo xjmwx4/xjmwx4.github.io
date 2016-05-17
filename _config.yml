@@ -1,0 +1,37 @@
+# auto: true
+# baseurl: "/blog"  编译参数: --baseurl URL
+baseurl: URL
+
+
+markdown: kramdown
+highlighter: rouge
+paginate: 8
+permalink: /:title
+encoding: UTF-8
+gems: [jekyll-paginate]
+
+title: Try to Build a GitHub Blog
+url: http://xjmwx4.github.io
+feed: /atom.xml
+author_info: <a href="http://xjmwx4.github.io/">xujia64</a>
+
+defaults: # 实现给站点所有页面和文章设置一个默认布局
+  -
+    scope:
+      path: "" # 一个空的字符串代表项目中所有的文件
+      type: "posts" # 以前的 `post`， 在 Jekyll 2.2 里。
+      # 只会给类型是posts的文件设置默认布局。你可以使用的不同的类型分别是pages,posts,drafts或者其他你站点中的集合。
+      # 当创建一个范围/值的对，如果选择了 type，你必须指定一个值给 path 。
+    values:
+      layout: "default"
+
+myblog:
+  gavatar: images/fitz.jpg
+  gpname: xujia
+  linkedin: http://www.linkedin.com/in/xujia64
+  github: https://github.com/xjmwx4
+  email: mailto:xjmwx4@gmail.com
+  coverimgs: []
+  postbgimg: []
+
+categories: [python, books]

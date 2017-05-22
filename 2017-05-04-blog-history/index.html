@@ -98,7 +98,7 @@
 <meta property="og:url" content="http://xjmwx4.github.io/2017-05-04-blog-history/index.html">
 <meta property="og:site_name" content="Pre Focuson">
 <meta property="og:description" content="一. 2017年5月4日 迁移博客至新电脑(台式机)操作：  新电脑安装Git Shell以及node.js(依照hexo官网);  hexo初始化及next主题获取(依照各自网站操作);  旧博客重要文件迁移至新博客1) 站点配置文件 _config.yml 完整替换初始化hexo站点配置文件;2) source下_post文件夹下旧文章;3) source下.nojekyll &amp;amp; CN">
-<meta property="og:updated_time" content="2017-05-07T15:51:54.579Z">
+<meta property="og:updated_time" content="2017-05-22T16:38:11.609Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博客搭建日志">
 <meta name="twitter:description" content="一. 2017年5月4日 迁移博客至新电脑(台式机)操作：  新电脑安装Git Shell以及node.js(依照hexo官网);  hexo初始化及next主题获取(依照各自网站操作);  旧博客重要文件迁移至新博客1) 站点配置文件 _config.yml 完整替换初始化hexo站点配置文件;2) source下_post文件夹下旧文章;3) source下.nojekyll &amp;amp; CN">
@@ -372,11 +372,14 @@
 <ol>
 <li>修改位置: next/layout/_macro/post.swig 查找previous或next即可找到位置修改</li>
 </ol>
-<p>三. 修改<a id="more"></a>效果，点击“阅读更多”进入文章不自动定位到阅读位置</p>
+<p>三. 站点文章显示及访问优化</p>
 <ol>
-<li>修改位置：scroll_to_more: false # default: true</li>
+<li>修改 <code>&lt;!--more--&gt;</code> 效果，点击“阅读更多”进入文章不自动定位到阅读位置。修改位置：scroll_to_more: false # default: true</li>
+<li>实现文章首页隐藏以及全面隐藏。修改位置：next/layout下index.swig和archive.swig文件下述关键地方增加 <code>visible !== &#39;hide&#39;</code> 语句。注：目前修改为文章全面隐藏，部分隐藏待完善<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;% <span class="keyword">for</span> post in page.posts %&#125;</div><div class="line">      &#123;% <span class="keyword">if</span> post.visible !== <span class="string">'hide'</span> %&#125;</div><div class="line">      <span class="comment">//default_content//</span></div><div class="line">      &#123;% <span class="keyword">endif</span> %&#125;</div><div class="line">    &#123;% <span class="keyword">endfor</span> %&#125;</div></pre></td></tr></table></figure>
+</li>
 </ol>
-<p>下一步考虑点: 如何新增部分文章到博客，但不显示在首页，直接显示在分类里或者其他区域</p>
+<p>存在问题：上一页、下一页仍存在该文章名</p>
+<p>待完善，实现文章部分隐藏</p>
 
       
     </div>
@@ -413,15 +416,19 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017-05-22-sql-practice/" rel="prev" title="SQL实践">
+                <i class="fa fa-chevron-left"></i> Next: SQL实践
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017-05-04-learn-sql-basic/" rel="next" title="SQL学习总结">
-                Previous:  SQL学习总结 <i class="fa fa-chevron-right"></i>
-              </a>
+              <a href="/2017-03-21-data-analysis-excel/" rel="next" title="数据分析之Excel养成">
+                Previous:  数据分析之Excel养成 <i class="fa fa-chevron-right"></i>
+              </a>  
             
           </div>
         </div>

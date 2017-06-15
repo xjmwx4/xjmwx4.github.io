@@ -1,0 +1,918 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据分析,SQL," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Pre Focuson" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前言目前正在考虑正式转向数据分析(技术型)方向，因此有在学习数据分析方面的硬技能如SQL/Python等。写这么一篇文章的目的是整理所学到的知识，对学到的知识点做一个基础性的梳理，加深自己理解的知识构建的同时也能之后做定期回顾以及知识点查询。 初衷是想做一个全面性的学习整理，因此这篇文章的目的是基础性、规范化、全面化，会在之后学习和实践的过程中不断完善，也不断地提升自己的知识水平和实践能力。 本篇">
+<meta name="keywords" content="数据分析,SQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL学习总结">
+<meta property="og:url" content="http://xjmwx4.github.io/2017-05-04-learn-sql-basic/index.html">
+<meta property="og:site_name" content="Pre Focuson">
+<meta property="og:description" content="前言目前正在考虑正式转向数据分析(技术型)方向，因此有在学习数据分析方面的硬技能如SQL/Python等。写这么一篇文章的目的是整理所学到的知识，对学到的知识点做一个基础性的梳理，加深自己理解的知识构建的同时也能之后做定期回顾以及知识点查询。 初衷是想做一个全面性的学习整理，因此这篇文章的目的是基础性、规范化、全面化，会在之后学习和实践的过程中不断完善，也不断地提升自己的知识水平和实践能力。 本篇">
+<meta property="og:image" content="http://xjmwx4.github.io/images/BIQABA.jpg">
+<meta property="og:image" content="http://xjmwx4.github.io/images/SQL_char.png">
+<meta property="og:image" content="http://xjmwx4.github.io/images/SQL_float.png">
+<meta property="og:image" content="http://xjmwx4.github.io/images/SQL_int.png">
+<meta property="og:updated_time" content="2017-06-15T00:21:00.519Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL学习总结">
+<meta name="twitter:description" content="前言目前正在考虑正式转向数据分析(技术型)方向，因此有在学习数据分析方面的硬技能如SQL/Python等。写这么一篇文章的目的是整理所学到的知识，对学到的知识点做一个基础性的梳理，加深自己理解的知识构建的同时也能之后做定期回顾以及知识点查询。 初衷是想做一个全面性的学习整理，因此这篇文章的目的是基础性、规范化、全面化，会在之后学习和实践的过程中不断完善，也不断地提升自己的知识水平和实践能力。 本篇">
+<meta name="twitter:image" content="http://xjmwx4.github.io/images/BIQABA.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xjmwx4.github.io/2017-05-04-learn-sql-basic/"/>
+
+
+
+
+
+  <title>SQL学习总结 | Pre Focuson</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-78684154-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?84c069be1715910c92ec05ad7c586e02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Pre Focuson</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">探索世界的未知</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            轨迹
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xjmwx4.github.io/2017-05-04-learn-sql-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fitz.Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/Fitz.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pre Focuson">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQL学习总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-04T00:00:00+08:00">
+                2017-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据分析/" itemprop="url" rel="index">
+                    <span itemprop="name">数据分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>目前正在考虑正式转向数据分析(技术型)方向，因此有在学习数据分析方面的硬技能如SQL/Python等。写这么一篇文章的目的是整理所学到的知识，对学到的知识点做一个基础性的梳理，加深自己理解的知识构建的同时也能之后做定期回顾以及知识点查询。</p>
+<p>初衷是想做一个全面性的学习整理，因此这篇文章的目的是基础性、规范化、全面化，会在之后学习和实践的过程中不断完善，也不断地提升自己的知识水平和实践能力。</p>
+<p><strong>本篇是SQL篇。</strong></p>
+<h2 id="几个基础性问题"><a href="#几个基础性问题" class="headerlink" title="几个基础性问题"></a>几个基础性问题</h2><p>在正式开始整理SQL的基础之前，有几个问题值得认真思考下：</p>
+<a id="more"></a>
+<ul>
+<li>为什么要做数据分析？</li>
+<li>对于大数据行业的职业规划？</li>
+<li>为什么要学习SQL？</li>
+<li>具体学习哪种SQL语言？</li>
+</ul>
+<p>以下是个人的回答<br>1.为什么要做数据分析？<br>有以下几个原因：<br>原因1：未来是一个信息与数据时代，大数据在科技领域、社会企业和社会生活方面扮演着尤为重要的角色；<br>原因2：目前从事的即为数据分析（初级），进一步从事技术型的数据分析，能够得到较好的职业发展，也能得到较为快速的行业入门；</p>
+<p>2.对于大数据行业的职业规划？</p>
+<p>在知乎有人对数据分析涉及的三个面做了一个说明，即分为BI (Business Intelligence), QA (Quantitative Analyst / Data Scientist), 以及BA (Business Analyst)三类。（详见<a href="https://www.zhihu.com/question/29265587/answer/141556905?utm_medium=social&amp;utm_source=ZHShareTargetIDMore" target="_blank" rel="external">如何快速成为数据分析师？——王曦的回答</a>）</p>
+<p>以上三个方向具体划描述与侧重为：<br>Business Analyst 定义问题，分析数据，提出并部分实现解决方案；<br>Quantitative Analyst 定义模型和架构，实现完整的解决方案；<br>Business Intelligence 对数据和度量进行可视化展示、自动化计算和更新。</p>
+<p>这三类方向的能力模型为：<br><img src="/images/BIQABA.jpg" alt="BI/QA/BA能力模型"></p>
+<p>从以上来说，个人职业规划为从BI入手，锻炼自己成为QA。</p>
+<p>3.为什么要学习SQL？<br>SQL是目前数据分析行业的一种通用性基础性语言，结构化查询的使用，使得快速处理大量/海量数据更加便捷…….</p>
+<p>4.具体学习哪种SQL语言？<br>可以先参看下知乎这个回答：<a href="https://www.zhihu.com/question/19866767" target="_blank" rel="external">SQL Server 和 Oracle 以及 MySQL 有哪些区别？</a>。考虑到自己想进驻的是互联网企业，同时从JD上来说，MySQL提及的次数相较SQL Server较多，因此目前选择学习的是MySQL。</p>
+<h2 id="学习资料备份区："><a href="#学习资料备份区：" class="headerlink" title="学习资料备份区："></a>学习资料备份区：</h2><p><a href="https://www.zhihu.com/question/19552975" target="_blank" rel="external">如何学习 SQL 语言？</a></p>
+<p>资料类：</p>
+<ol>
+<li><p><a href="http://zhaodedong.leanote.com/post/mysql-sql%E7%BB%83%E4%B9%A0%E9%A2%98" target="_blank" rel="external">mysql/sql练习题</a></p>
+</li>
+<li><p><a href="http://blog.csdn.net/qaz13177_58_/article/details/5575711/" target="_blank" rel="external">经典SQL练习题</a></p>
+</li>
+<li><p><a href="http://blog.csdn.net/friendan/article/details/8072668" target="_blank" rel="external">SQL查询语句练习题27道</a></p>
+</li>
+</ol>
+<h1 id="SQL正文"><a href="#SQL正文" class="headerlink" title="SQL正文"></a>SQL正文</h1><h2 id="SQL简介"><a href="#SQL简介" class="headerlink" title="SQL简介"></a>SQL简介</h2><p>SQL是结构化查询语言（Structured Query Language）的缩写。SQL是一种专门用来与数据库沟通的语言，设计SQL的目的是很好地完成一项任务——提供一种从数据库中读写数据的简单有效的方法。</p>
+<p>SQL有如下的优点：</p>
+<ul>
+<li>SQL不是某个特定数据库供应商专有的语言。几乎所有重要的DBMS都支持SQL，所以学习此语言使你几乎能与所有数据库打交道。</li>
+<li>SQL简单易学。它的语句全都是由有很强描述性的英语单词组成，而且这些单词的数目不多。</li>
+<li>SQL虽然看上去很简单，但实际上是一种强有力的语言，灵活使用其语言元素，可以进行非常复杂和高级的数据库操作。</li>
+</ul>
+<h2 id="SQL应用"><a href="#SQL应用" class="headerlink" title="SQL应用"></a>SQL应用</h2><p>SQL作为一种操作数据库数据的编程语言，其作用就是操作数据库中海量的数据，尤其是在目前的互联网环境下，巨量数据的产生，在数据挖掘前期的数据清洗和加工过程中，一定程度上都离不开SQL。</p>
+<h2 id="SQL基础语法"><a href="#SQL基础语法" class="headerlink" title="SQL基础语法"></a>SQL基础语法</h2><h3 id="数据库结构相关"><a href="#数据库结构相关" class="headerlink" title="数据库结构相关"></a>数据库结构相关</h3><p>1.创建数据库<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> [<span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>] database_name</div><div class="line">[<span class="keyword">DEFAULT</span>] <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> [=] charset_name;</div></pre></td></tr></table></figure></p>
+<p>其中 <code>charset_name</code> 编码方式类型有 <code>utf-8</code>、<code>gbk</code> 等编码方式。在操作数据库时，应当注意操作数据库对应的<strong>编码方式</strong>。同时通过SQL客户端如MySQL导入数据时，应当保证导入的数据与MySQL要求的编码方式相同（如统一为 <code>utf-8</code> 编码方式）</p>
+<p>2.修改和删除数据库<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> &#123;<span class="keyword">DATABASE</span> | <span class="keyword">SCHEMA</span>&#125; [database_name]</div><div class="line">[<span class="keyword">DEFAULT</span>] <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> [=] charset_name; //修改数据库</div></pre></td></tr></table></figure></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DROP</span> &#123;<span class="keyword">DATABASE</span> | <span class="keyword">SCHEMA</span>&#125; [<span class="keyword">IF</span> <span class="keyword">EXISTS</span>] database_name; //删除数据库</div></pre></td></tr></table></figure>
+<p>3.其他一些数据库操作语句<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SHOW</span> <span class="keyword">DATABASES</span>; //查看现有所有数据库</div></pre></td></tr></table></figure></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">USE</span> database_name; //选择某数据库进行操作</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SHOW</span> <span class="keyword">WARNINGS</span>; //查看警告</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> database_name; //查看数据库结构，包含查看编码方式</div></pre></td></tr></table></figure>
+<h3 id="数据表结构相关"><a href="#数据表结构相关" class="headerlink" title="数据表结构相关"></a>数据表结构相关</h3><p>1.创建数据表<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> &lt;表名&gt;</div><div class="line">(</div><div class="line">      字段名<span class="number">1</span> 数据类型［列级别约束条件］［默认值］,</div><div class="line">      字段名<span class="number">2</span> 数据类型［列级别约束条件］［默认值］,</div><div class="line">      ……</div><div class="line">      ［表级别约束条件］</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>例:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tb4(</div><div class="line"> <span class="keyword">id</span> <span class="built_in">SMALLINT</span> <span class="keyword">UNSIGNED</span> AUTO_INCREMENT PRIMARY <span class="keyword">KEY</span>,</div><div class="line"> usename <span class="built_in">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span>,</div><div class="line"> pid SAMLLINT <span class="keyword">UNSIGNED</span>,</div><div class="line"> FOREIGN <span class="keyword">KEY</span> (PID) <span class="keyword">REFERENCES</span> provinces (<span class="keyword">id</span>) <span class="keyword">ON</span> <span class="keyword">DELETE</span> <span class="keyword">CASCADE</span></div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>2.其他一些表相关操作<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLES</span> [<span class="keyword">FROM</span> db_name]; //查看数据表 不写from默认当前数据库下数据表查看，from支持跨数据库查看数据表</div></pre></td></tr></table></figure></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DATABASE</span>(); //查看当前数据库</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SHOW</span> <span class="keyword">COLUMNS</span> <span class="keyword">FROM</span> table_name; //查看数据表结构</div></pre></td></tr></table></figure>
+<h4 id="数据表结构介绍"><a href="#数据表结构介绍" class="headerlink" title="数据表结构介绍"></a>数据表结构介绍</h4><p>1.数据类型<br>数据表的数据类型从类别上分为以下几类：</p>
+<ul>
+<li>字符型</li>
+<li>浮点型</li>
+<li>整型</li>
+<li>日期时间型</li>
+</ul>
+<p>1.1 字符型<br><img src="/images/SQL_char.png" alt="SQL_char"></p>
+<p>以上常用的字符型类型包括 <code>CHAR(M)</code> （M最大为255）、<code>VARCHAR(M)</code>、<code>TEXT</code> （长度为65535）、<code>ENUM(&#39;value1&#39;, &#39;value2&#39;, ...)</code>、<code>SET(&#39;value1&#39;, &#39;value2&#39;, ...)</code>。</p>
+<p>其中 <code>ENUM(&#39;value1&#39;, &#39;value2&#39;, ...)</code> 为枚举类型，表示只能有一个值的字符串，从值列’value1’，’value2’，…，NULL中或特殊’’错误值中选出。ENUM列最多可以有65,535个截然不同的值。ENUM值在内部用整数表示。 <code>SET(&#39;value1&#39;, &#39;value2&#39;, ...)</code> 为一个设置。字符串对象可以有零个或多个值，每个值必须来自列值’value1’，’value2’，…SET列最多可以有64个成员。SET值在内部用整数表示。</p>
+<p>1.2 浮点型<br><img src="/images/SQL_float.png" alt="SQL_float"></p>
+<p>1.3 整型<br><img src="/images/SQL_int.png" alt="SQL_int"></p>
+<p>整型类型的选择影响到内存的优化。一般来说， <code>TINYINT</code> 用于0-255以内的数值（无符号数，有符号数对半），不是很大的数据可以采用 <code>SMALLINT</code> （无符号数为65536长度，有符号数对半），其他三种类型可按需选择。</p>
+<p>1.4 日期时间型<br>这类数据类型包括 <code>YEAR</code> （YYYY，1901-2155）、 <code>TIME</code> （HH:MM:SS）、 <code>DATE</code> （YYYY-MM-DD）、 <code>DATETIME</code> （YYYY-MM-DD HH:MM:SS）、 <code>TIMESTAMP</code> （YYYY-MM-DD HH:MM:SS）。数据范围此处不详细展开。</p>
+<p>2.约束</p>
+<ul>
+<li>约束保证数据的完整性和一致性</li>
+<li>约束分为表级约束和列级约束(列参数后定义，一般多为列级约束)</li>
+<li>约束类型包括：<ul>
+<li>NOT NULL</li>
+<li>PRIMARY KEY（主键约束）</li>
+<li>UNIQUE KEY</li>
+<li>DEFAULT</li>
+<li>FOREIGN KEY（外键约束）</li>
+</ul>
+</li>
+</ul>
+<p>2.1 NOT NULL 非空约束<br>有 <code>NOT NULL</code> 与 <code>NULL</code> 之分，当没有 <code>NOT NULL</code> 时默认可以为 <code>NULL</code></p>
+<p>2.2 PRIMARY KEY 主键约束</p>
+<ul>
+<li>每张数据表只能存在一个主键</li>
+<li>主键保证记录的唯一性</li>
+<li>主键自动为NOT NULL</li>
+</ul>
+<p><code>AUTO_INCREMENT</code> 为自动编号，<code>AUTO_INCREMENT</code> 必须和 <code>PRIMARY KEY</code> 一起使用，反之则不需要</p>
+<p>2.3 UNIQUE KEY 唯一约束</p>
+<ul>
+<li>唯一约束可以保证记录的唯一性</li>
+<li>唯一约束的字段可以为空值（NULL）</li>
+<li>每张数据表可以存在多个唯一约束</li>
+</ul>
+<p>2.4 DEFAULT 默认值<br>默认值直接跟在 <code>DEFAULT</code> 之后即可，如 <code>DEFAULT &#39;3&#39;</code></p>
+<p>2.5 FOREIGN KEY 外键约束</p>
+<ul>
+<li>保证数据一致性，完整性</li>
+<li>实现一对一或多为多约束</li>
+</ul>
+<p>例：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tb4(</div><div class="line"> <span class="keyword">id</span> <span class="built_in">SMALLINT</span> <span class="keyword">UNSIGNED</span> AUTO_INCREMENT PRIMARY <span class="keyword">KEY</span>,</div><div class="line"> usename <span class="built_in">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span>,</div><div class="line"> sex ENUM(<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>) <span class="keyword">DEFAULT</span> <span class="string">'3'</span></div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>除了上述创建数据表和阐明定义约束之外，对于 <code>PRIMARY KEY</code> 和 <code>FOREIGN KEY</code> 还可以有如下案例:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> sc  </div><div class="line">(  </div><div class="line">    SNO <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,  </div><div class="line">    CNO <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,  </div><div class="line">    SCORE <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,  </div><div class="line">    PRIMARY <span class="keyword">KEY</span> (SNO,CNO),  //SNO为student的主键，CNO为course的主键</div><div class="line">    FOREIGN <span class="keyword">KEY</span> (SNO) <span class="keyword">REFERENCES</span> student(SNO),  </div><div class="line">    FOREIGN <span class="keyword">KEY</span> (CNO) <span class="keyword">REFERENCES</span> course(CNO)  </div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>其中PRIMARY KEY和FOREIGN KEY标准语法见下：<br><code>［CONSTRAINT &lt;约束名&gt;］PRIMARY KEY(&lt;字段名&gt;)</code><br><code>PRIMARY KEY［字段1,字段2,……,字段n］</code> （多字段联合主键）<br><code>［CONSTRAINT &lt;外键名&gt;］FOREIGN KEY(&lt;字段名１&gt; [,&lt;字段名2&gt;……] ) REFERENCES &lt;主表名&gt; (&lt;主键列1[,主键列2,……]&gt;)</code></p>
+<h3 id="数据表操作"><a href="#数据表操作" class="headerlink" title="数据表操作"></a>数据表操作</h3><p>1.查询<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> table_name; //查询数据表所有（列）记录</div><div class="line"><span class="keyword">SELECT</span> column_name1, column_name2, ... <span class="keyword">FROM</span> table_name;</div></pre></td></tr></table></figure></p>
+<p>2.对列进行操作（不涉及数值）<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> [<span class="keyword">COLUMN</span>]  (column_name column_definition [<span class="keyword">FIRST</span> | <span class="keyword">AFTER</span> column_name]); //新增一列</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">DROP</span> column1, <span class="keyword">DROP</span> column2; //删除列</div></pre></td></tr></table></figure></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> TABLA table_name <span class="keyword">MODIFY</span> [<span class="keyword">COLUMN</span>] column_name column_definition [<span class="keyword">FIRST</span> | <span class="keyword">AFTER</span> col_name]; //修改列定义/位置</div><div class="line"><span class="keyword">ALTER</span> TABLA table_name <span class="keyword">CHANGE</span> [<span class="keyword">COLUMN</span>] old_column_name new_column_name column_definition [<span class="keyword">FIRST</span>|<span class="keyword">AFTER</span> column_name]; //修改列名称</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">RENAME</span> [<span class="keyword">TO</span>|<span class="keyword">AS</span>] new_table_name; //修改数据表名称</div><div class="line"><span class="keyword">RENAME</span> <span class="keyword">TABLE</span> table_name <span class="keyword">TO</span> new_table_name [, table_name2 <span class="keyword">TO</span> new_table_name2] ...; //修改（多个）数据表名称</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [symbol]] PRIMARY <span class="keyword">KEY</span> [index_type]  (index_col_name,...); //添加主键约束</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [symbol]] <span class="keyword">UNIQUE</span> [<span class="keyword">INDEX</span>|<span class="keyword">KEY</span>] [index_name] [index_type]  (index_col_name,...); //添加唯一约束</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> [<span class="keyword">CONSTRAINT</span> [symbol]] FOREIGN <span class="keyword">KEY</span> [index_name]  (index_col_name,...) reference_definition; //添加外键约束</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ALTER</span> [<span class="keyword">COLUMN</span>] column_name &#123;<span class="keyword">SET</span> <span class="keyword">DEFAULT</span> literal | <span class="keyword">DROP</span> <span class="keyword">DEFAULT</span>&#125;; //添加/删除默认约束</div><div class="line"><span class="keyword">ALTER</span> TABLA table_name <span class="keyword">DROP</span> PRIMARY <span class="keyword">KEY</span>; //删除主键约束</div><div class="line"><span class="keyword">ALTER</span> TABLA table_name <span class="keyword">DROP</span> &#123;<span class="keyword">INDEX</span>|<span class="keyword">KEY</span>&#125; index_name; //删除唯一约束 删除约束但不删除字段，约束名字index_name通过 <span class="keyword">SHOW</span> <span class="keyword">INDEX</span> <span class="keyword">FROM</span> table_name查询得到</div><div class="line"><span class="keyword">ALTER</span> TABLA table_name <span class="keyword">DROP</span> FOREIGN <span class="keyword">KEY</span> fk_symbol; //删除外键约束</div></pre></td></tr></table></figure>
+<p>3.插入记录<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name <span class="keyword">VALUES</span>(value1, value2, ...); //此语句必须插入所有的column数值</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name(column2, column3, ...) <span class="keyword">VALUE</span>(value2, value3, ...); 此语句不需要插入所有column值，仅插入部分column值（注意column的NOT NULL限制，有NOT NULL限制的column数值必须插入）</div></pre></td></tr></table></figure></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> [<span class="keyword">INTO</span>] table_name <span class="keyword">SET</span> <span class="keyword">column</span>-<span class="keyword">name</span>=&#123;expr | <span class="keyword">DEFAULT</span>&#125;,... ; //插入记录另一种方法，注：此方法可以使用于子查询(SubQuery)</div><div class="line"><span class="keyword">INSERT</span> [<span class="keyword">INTO</span>] table_name [(column_name,...)] <span class="keyword">SELECT</span> ... ; //注：此方法可以将查询结果插入到指定数据表</div></pre></td></tr></table></figure>
+<p>4.更新记录<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">UPDATE</span> table_name <span class="keyword">SET</span> old_value1 = new_value1 <span class="keyword">WHERE</span> column1 = old_value1; //常规操作</div><div class="line"><span class="keyword">UPDATE</span> [<span class="keyword">LOW_PRIORITY</span>] [INGNORE] table_name <span class="keyword">SET</span> column_name1=&#123;expr1|<span class="keyword">DEFAULT</span>&#125; [<span class="keyword">WHERE</span> where_condition]; //在where之前可更新多个column_name对应的values</div></pre></td></tr></table></figure></p>
+<p>5.删除记录<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> table_name [<span class="keyword">WHERE</span> where_condition]; //删除记录（单表删除）</div></pre></td></tr></table></figure></p>
+<p>6.WHERE与HAVING 设置条件<br><code>WHERE</code> <code>HAVING</code><br><em><code>HAVING</code> 设置分组条件</em></p>
+<p>7.分组&amp;排序<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GROUP BY &#123;column_name1|position1, column_name2|position2, ...&#125; [ASC|DESC]; //查询结果分组，AES/DESC-升序/降序排列</div><div class="line">ORDER BY &#123;column_name1|position1, column_name2|position2, ...&#125; [ASC|DESC]; //对结果进行升序/降序排列</div></pre></td></tr></table></figure></p>
+<p>8.LIMIT限制查询结果条数<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> table_name <span class="keyword">LIMIT</span> <span class="number">2</span>;    //选择前两条记录</div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> table_name <span class="keyword">LIMIT</span> <span class="number">2</span>,<span class="number">2</span>;  //从第三行记录开始，筛选出2行数据，并从0开始编号</div></pre></td></tr></table></figure></p>
+<p>9.MySQL标准语句顺序<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> select_expr [, select_expr, ...]</div><div class="line">  <span class="keyword">FROM</span> table_name</div><div class="line">  	[<span class="keyword">WHERE</span> wjere_condition]</div><div class="line">  	[<span class="keyword">GROUP</span> <span class="keyword">BY</span> &#123;columnname|<span class="keyword">position</span>&#125; [<span class="keyword">ASC</span> | <span class="keyword">DESC</span>],...]</div><div class="line">  	[<span class="keyword">HAVING</span> where_condition]</div><div class="line">  	[<span class="keyword">ORDER</span> <span class="keyword">BY</span> &#123;column_name|expr|<span class="keyword">position</span>&#125; [<span class="keyword">ASC</span>|<span class="keyword">DESC</span>],...]</div><div class="line">  	[<span class="keyword">LIMIT</span> &#123;[offser,] roe_count|<span class="keyword">row_count</span> <span class="keyword">OFFSET</span> ofset&#125;];</div></pre></td></tr></table></figure></p>
+<h1 id="SQL实践"><a href="#SQL实践" class="headerlink" title="SQL实践"></a>SQL实践</h1><h2 id="常用SQL语句"><a href="#常用SQL语句" class="headerlink" title="常用SQL语句"></a>常用SQL语句</h2><h2 id="模块化SQL"><a href="#模块化SQL" class="headerlink" title="模块化SQL"></a>模块化SQL</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据分析/" rel="tag"># 数据分析</a>
+          
+            <a href="/tags/SQL/" rel="tag"># SQL</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017-05-04-blog-history/" rel="prev" title="博客搭建日志">
+                <i class="fa fa-chevron-left"></i> Next: 博客搭建日志
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017-03-21-data-analysis-excel/" rel="next" title="数据分析之Excel养成">
+                Previous:  数据分析之Excel养成 <i class="fa fa-chevron-right"></i>
+              </a>  
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/Fitz.jpg"
+               alt="Fitz.Xu" />
+          <p class="site-author-name" itemprop="name">Fitz.Xu</p>
+           
+              <p class="site-description motion-element" itemprop="description">去折腾，去尝试，去探索世界的未知</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xjmwx4" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.linkedin.com/in/xujia64" target="_blank" title="Linkedin">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  Linkedin
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/70374031" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/xjmwx4" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#几个基础性问题"><span class="nav-number">1.1.</span> <span class="nav-text">几个基础性问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习资料备份区："><span class="nav-number">1.2.</span> <span class="nav-text">学习资料备份区：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL正文"><span class="nav-number">2.</span> <span class="nav-text">SQL正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL简介"><span class="nav-number">2.1.</span> <span class="nav-text">SQL简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL应用"><span class="nav-number">2.2.</span> <span class="nav-text">SQL应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL基础语法"><span class="nav-number">2.3.</span> <span class="nav-text">SQL基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库结构相关"><span class="nav-number">2.3.1.</span> <span class="nav-text">数据库结构相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据表结构相关"><span class="nav-number">2.3.2.</span> <span class="nav-text">数据表结构相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据表结构介绍"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">数据表结构介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据表操作"><span class="nav-number">2.3.3.</span> <span class="nav-text">数据表操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL实践"><span class="nav-number">3.</span> <span class="nav-text">SQL实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用SQL语句"><span class="nav-number">3.1.</span> <span class="nav-text">常用SQL语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块化SQL"><span class="nav-number">3.2.</span> <span class="nav-text">模块化SQL</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fitz.Xu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,929 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Pre Focuson" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="这一部分是Python方面的一些学习笔记，用于记录自己学习Python的过程，同时也是对自己Python这块知识的一个梳理，后期也可用于Python复习。 Python学习的第一篇，主要介绍第三方库Anaconda和第三方工具IPython的应用。">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习笔记1：Anaconda与IPython">
+<meta property="og:url" content="http://xjmwx4.github.io/2017-09-28-python-learning-01/index.html">
+<meta property="og:site_name" content="Pre Focuson">
+<meta property="og:description" content="这一部分是Python方面的一些学习笔记，用于记录自己学习Python的过程，同时也是对自己Python这块知识的一个梳理，后期也可用于Python复习。 Python学习的第一篇，主要介绍第三方库Anaconda和第三方工具IPython的应用。">
+<meta property="og:image" content="http://xjmwx4.github.io/images/python-1-1.png">
+<meta property="og:image" content="http://xjmwx4.github.io/images/python-1-2.png">
+<meta property="og:image" content="http://xjmwx4.github.io/images/python-1-3.png">
+<meta property="og:image" content="http://xjmwx4.github.io/images/python-1-4.png">
+<meta property="og:image" content="http://xjmwx4.github.io/images/python-1-5.png">
+<meta property="og:updated_time" content="2017-09-28T13:43:08.306Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python学习笔记1：Anaconda与IPython">
+<meta name="twitter:description" content="这一部分是Python方面的一些学习笔记，用于记录自己学习Python的过程，同时也是对自己Python这块知识的一个梳理，后期也可用于Python复习。 Python学习的第一篇，主要介绍第三方库Anaconda和第三方工具IPython的应用。">
+<meta name="twitter:image" content="http://xjmwx4.github.io/images/python-1-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xjmwx4.github.io/2017-09-28-python-learning-01/"/>
+
+
+
+
+
+  <title>Python学习笔记1：Anaconda与IPython | Pre Focuson</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-78684154-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?84c069be1715910c92ec05ad7c586e02";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Pre Focuson</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">探索世界的未知</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            轨迹
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xjmwx4.github.io/2017-09-28-python-learning-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fitz.Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/Fitz.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pre Focuson">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python学习笔记1：Anaconda与IPython</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-28T00:00:00+08:00">
+                2017-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这一部分是Python方面的一些学习笔记，用于记录自己学习Python的过程，同时也是对自己Python这块知识的一个梳理，后期也可用于Python复习。</p>
+<p>Python学习的第一篇，主要介绍第三方库Anaconda和第三方工具IPython的应用。</p>
+<a id="more"></a>
+<h2 id="Python版本的选择"><a href="#Python版本的选择" class="headerlink" title="Python版本的选择"></a>Python版本的选择</h2><p>对于Python版本的选择，主要在于是Python2还是Python3的选择，Python社区正在慢慢地从Python2系列解释器过渡到Python3系列。因而，对于一般的Python开发和学习来说，可以选择Python3，而对一部分领域（如数据分析）来说，有一部分PythonPython科学计算社区还没有转向Python3，因而对于这一块，仍可采用Python2进行开发和学习，当然，采用Python3也可完成大部分的开发和学习内容。</p>
+<p>之所以有Python2和Python3的区别，在于代码是否支持向后兼容。在Python3.0面世以前，所有的Python代码都是向后兼容的，为了让Python语言更加先进，Python社区认为做出一些向后不兼容的修改是必要的，因此会有Python2和Python3的区别。</p>
+<p>如何辨别使用的代码是Python2还是Python3？一个最简单的判断是看<code>print</code>语法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> <span class="string">'Python2'</span></div><div class="line"></div><div class="line">print(<span class="string">'Python3'</span>)</div></pre></td></tr></table></figure>
+<h2 id="开发环境IDE的选择-Anaconda"><a href="#开发环境IDE的选择-Anaconda" class="headerlink" title="开发环境IDE的选择-Anaconda"></a>开发环境IDE的选择-Anaconda</h2><ol>
+<li><p>原生Python的安装<br>如果选择原生Python安装的话，可以前往<a href="https://www.python.org/" target="_blank" rel="external">Python官网</a>选择对应的版本进行安装即可。其中，建议直接选择<code>.exe</code>可执行文件直接安装，x86对应32位系统，x86-64对应64位系统。中间还涉及到pip命令的安装，各种包（packages）的安装。在包安装的过程中，如出现问题可参照<a href="http://www.cnblogs.com/eastmount/p/5052871.html" target="_blank" rel="external">安装numpy+scipy+matlotlib+scikit-learn及问题解决</a>文章来解决。</p>
+</li>
+<li><p>第三方Python工具的选择<br>除了Python原生之外，还可以选择其他的Python发行版本来便于Python开发和学习。这里选择<a href="https://www.continuum.io/downloads" target="_blank" rel="external">Anaconda</a>来进行Python安装。</p>
+</li>
+</ol>
+<p>从介绍来说，Anaconda是数据分析方面常用的一种Python发行版本，其包含了conda、Python等190多个科学包及其依赖项。Anaconda作为一种Python发行版本，最便捷的两个地方在于：1.借助conda可以实现多版本并存、切换；2.借助conda可以实现各种开源包（packages）的管理（安装Anaconda时默认已安装了大部分的Python学习包）。</p>
+<p>关于Anaconda安装部分不多说了，如有问题可参照网上的解决办法。安装完Anaconda之后，即可使用conda命令</p>
+<p>2.1 包（packages）管理</p>
+<p>Anaconda中涉及到包管理的命令主要是以下几个:</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 查看已安装的包</div><div class="line">conda list </div><div class="line"># 安装 matplotlib </div><div class="line">conda install matplotlib</div><div class="line"># 包更新</div><div class="line">conda update matplotlib</div><div class="line"># 删除包</div><div class="line">conda remove matplotlib</div><div class="line"># 查看某个指定环境的已安装包，同理，中间加入 -n 环境名 即可实现指定环境的操作</div><div class="line">conda list -n python34</div></pre></td></tr></table></figure>
+<p>在 conda 中 anything is a package。conda 本身可以看作是一个包，python 环境可以看作是一个包，anaconda 也可以看作是一个包，因此除了普通的第三方包支持更新之外，下述3个包也支持。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 更新conda本身版本</span></div><div class="line">conda update conda</div><div class="line"><span class="comment"># 更新anaconda 应用版本</span></div><div class="line">conda update anaconda</div><div class="line"><span class="comment"># 更新python版本，假设当前python环境是3.6.1，而最新版本是3.6.2，那么就会升级到3.6.2</span></div><div class="line">conda update python</div></pre></td></tr></table></figure>
+<p>2.2 Python版本管理</p>
+<p>可以先查看目前安装的python版本和环境。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conda info -e</div></pre></td></tr></table></figure>
+<p>版本管理的基本命令如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 基于python3.6版本创建一个名字为python36的环境</span></div><div class="line">conda create --name python36 python=<span class="number">3.6</span> </div><div class="line"><span class="comment"># 激活此环境</span></div><div class="line">activate python36  			<span class="comment"># Windows</span></div><div class="line">source activate python36 	<span class="comment"># Linux/Mac</span></div><div class="line"><span class="comment"># 再来检查python版本，显示是 3.6</span></div><div class="line">python -V  </div><div class="line"><span class="comment"># 退出当前环境</span></div><div class="line">deactivate python36 		<span class="comment"># Windows</span></div><div class="line">source deactivate python36	<span class="comment"># Linux/Mac</span></div><div class="line"><span class="comment"># 删除该环境</span></div><div class="line">conda remove -n python36 --all</div><div class="line"><span class="comment"># 或者 </span></div><div class="line">conda env remove  -n python36</div><div class="line"></div><div class="line"><span class="comment"># 查看所以安装的环境</span></div><div class="line">conda info -e</div><div class="line">python36              *  D:\Programs\Anaconda2\envs\python36</div><div class="line">root                     D:\Programs\Anaconda2</div></pre></td></tr></table></figure>
+<p>需要说明的是，通过上述方式创建的新的python环境，只安装了python3.6的必须项，如python/pip等，但并没有安装其所需要的各种python包（可通过 <code>conda list</code>命令查看），如果希望该环境像默认环境那样，安装anaconda集合包，只需要执行下述命令即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 在当前环境下安装anaconda包集合</span></div><div class="line">conda install anaconda</div></pre></td></tr></table></figure>
+<p>参考：<a href="http://www.jianshu.com/p/2f3be7781451" target="_blank" rel="external">Anaconda使用总结</a></p>
+<p>另外，Anaconda安装完了之后，会有Anaconda Prompt、Anaconda Navigator、Anaconda Cloud、IPython Notebook、Jupyter Notebook、Spyter等软件出现。这些软件功能如下：</p>
+<ul>
+<li>Anaconda Prompt：类似cmd的一个命令窗口</li>
+<li>Anaconda Navigator：可以可视化统一管理Anaconda安装的内容</li>
+<li>Anaconda Cloud：云解决方案</li>
+<li>IPython Notebook：一种交互式计算和开发环境</li>
+<li>Jupyter Notebook：交互式笔记本，结合浏览器使用</li>
+<li>Spyter：一种IDE，有类似Matlab的“工作空间”</li>
+</ul>
+<p>虽然有诸多配置软件，但主要可以使用IPython进行Python开发和学习，能够满足一般的需求。后续如有补充会及时更新。</p>
+<h2 id="IPython"><a href="#IPython" class="headerlink" title="IPython"></a>IPython</h2><p>IPython是一个叫高效的交互式Python shell，除此之外，它还有一个可以直接进行回吐操作的GUI控制台，一个基于Web的交互式笔记本，一集一个轻量级的快速并行计算引擎。</p>
+<p>启动IPython有两种方法，一可以直接启动安装Anaconda之后显示的Ipython Notebook，二也可以通过Anaconda Prompt命令行中执行<code>ipython</code>进入IPython界面。</p>
+<p>下面讲述IPython操作的一些技巧和功能：</p>
+<h3 id="1-与操作系统进行交互"><a href="#1-与操作系统进行交互" class="headerlink" title="1. 与操作系统进行交互"></a>1. 与操作系统进行交互</h3><p>IPython可以直接和系统shell进行交互。以下是与系统相关的Ipython模式命令</p>
+<ul>
+<li>!cmd 在系统shell中执行cmd命令</li>
+<li>%alias alias_name cmd 为系统shell命令定义别名</li>
+<li>%bookmark 使用IPython的目录书签系统</li>
+<li>%cd dierctory 更改工作目录</li>
+<li>%pwd 显示当前动作目录</li>
+<li>%push directory 将当前目录入栈，并转向目标目录</li>
+<li>%popd 弹出栈顶目录，并转向该目录</li>
+<li>%dirs 返回一个含有当前目录栈的列表</li>
+<li>%dhist 打印目录访问历史记录</li>
+<li>%env 以dict形式返回系统环境变量</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">!ping prefocuson.me <span class="comment"># 在IPython中执行ping命令</span></div><div class="line">%bookmark py C:\Users\Administrator\python 将python文件路径存为书签目录</div><div class="line">%bookmark adm C:\Users\Administrator\</div><div class="line">%bookmark -l 列出所有书签，书签永久化</div></pre></td></tr></table></figure>
+<h3 id="2-标准键盘命令"><a href="#2-标准键盘命令" class="headerlink" title="2. 标准键盘命令"></a>2. 标准键盘命令</h3><p>与普通cmd窗口不同，IPython可以执行标准键盘命令。常见标准键盘命令如下：</p>
+<ul>
+<li>Ctrl+V / Ctrl+Shift+V : 粘贴，可跨行粘贴完整代码</li>
+<li>Ctrl+C: 中止正在执行的代码</li>
+<li>Ctrl+K: 删除从光标开始至行尾的文本</li>
+<li>Ctrl+U: 清空当前航的所有文本（和Ctrl+K相反，即删除从光标开始至行首的文本，并非完全删除）</li>
+<li>Ctrl+L: 清屏</li>
+</ul>
+<h3 id="3-Tab键自动补全"><a href="#3-Tab键自动补全" class="headerlink" title="3. Tab键自动补全"></a>3. Tab键自动补全</h3><p>Tab键可以实现自动补全功能，其中包括已输入变量（对象、函数）的补全，模块的补全</p>
+<p><img src="/images/python-1-1.png" alt="Tab键自动补全"></p>
+<h3 id="4-内省"><a href="#4-内省" class="headerlink" title="4. 内省"></a>4. 内省</h3><p>内省是指显示变量/对象的一些通用信息。在变量的前面或者后面加上一个问号<code>?</code>，就可以将有关该对象的一些通用信息显示出来。<code>??</code>两个问号则会显示函数的source源代码部分。</p>
+<p><img src="/images/python-1-2.png" alt="内省"></p>
+<p>从图中可以看出，<code>?</code>一个问号会显示docstring部分，<code>??</code>两个问号则会显示source部分，而没有docstring部分。其他部分两个命令相同。</p>
+<p>注：对于不同的对象，如变量和函数两种对象，内容的结果会有所区别，因为其通用属性不同。</p>
+<h3 id="5-run命令执行文件"><a href="#5-run命令执行文件" class="headerlink" title="5. %run命令执行文件"></a>5. %run命令执行文件</h3><p>In[1]: %run test.py</p>
+<p>这种方式需要注意的是工作路径，默认采用的是默认路径，如涉及到其他路径，可以通过<code>cd</code>命令切换到其他路径，或者run的命令中写明绝对路径。</p>
+<p><code>%run</code>命令执行后，文件中所定义的全部变量（含import、函数、全局变量）就可以在当前IPython shell中直接调用了。</p>
+<h3 id="6-执行剪贴板中的命令"><a href="#6-执行剪贴板中的命令" class="headerlink" title="6. 执行剪贴板中的命令"></a>6. 执行剪贴板中的命令</h3><p><code>%paste</code>可以实现执行剪贴板中的命令。<code>%paste</code>回车后直接执行剪贴板代码，早期的时候有个<code>%cpaste</code>命令，<code>%cpaste</code>命令则允许多次粘贴然后执行粘贴的代码。但查阅了<a href="http://ipython.readthedocs.io/en/stable/interactive/magics.html" target="_blank" rel="external">IPython Magic文档</a>后发现%cpaste命令应该是被取消了。</p>
+<p>说明，执行<code>%cpaste</code>后，无法手动 Ctrl+V 粘贴，也无法鼠标右键进行粘贴，似乎只能手动输入，同时其也可以与剪贴板无关系，如下图<code>In[21]</code>处代码，此部分代码为手动输入，执行的结果与剪贴板无关，<code>In[22]</code>命令为<code>%cpaste</code>中调用<code>%paste</code>命令执行结果。</p>
+<p><img src="/images/python-1-3.png" alt="%cpaste"></p>
+<h3 id="7-计算代码运行时间：-time和-timeit"><a href="#7-计算代码运行时间：-time和-timeit" class="headerlink" title="7. 计算代码运行时间：%time和%timeit"></a>7. 计算代码运行时间：<code>%time</code>和<code>%timeit</code></h3><p><code>%time</code>命令用于计算单次命令运行时间，<code>%timeit</code>则会自动多次执行命令函数输出运行的平均时间。</p>
+<p>注：这是因为<code>%time</code>命令输出的结果并不是一个非常精确的结果，多次执行会发现其结果是会变的。</p>
+<p><img src="/images/python-1-4.png" alt="%time和%timeit"></p>
+<p>%time函数来源于time模块函数，time模块中有time.time命令用于记录当前时间，从而可以计算代码所运行的时间。这一部分代码样例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> time</div><div class="line">start = time.time()</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(iterations):</div><div class="line">	<span class="comment">#这里放置需要执行的代码</span></div><div class="line">	elapsed_per = (time.time() - start) / iterations</div></pre></td></tr></table></figure>
+<h3 id="8-Magic魔术命令"><a href="#8-Magic魔术命令" class="headerlink" title="8. Magic魔术命令"></a>8. Magic魔术命令</h3><p>下述列举部分magic命令：</p>
+<ul>
+<li>%magic 显示所有魔术命令的文档</li>
+<li>%debug 从最新的异常跟踪的地步进入交互式调试器</li>
+<li>%hist 打印命令的输入、输出历史记录</li>
+<li>%pdb 在异常发生后自动进入调试器</li>
+<li>%paste 执行剪贴板中的python代码</li>
+<li>%reset 删除interactive命名空间中的全部变量/名称</li>
+<li>%run filename.py 在IPython中执行一个python脚本文件</li>
+<li>%prun statement 通过cProfile执行statement，并打印分析器输出结果</li>
+<li>%time statement 报告statement运行时间</li>
+<li>%timeit statement 自动多次执行statement以计算平均运行时间</li>
+</ul>
+<p>其中，<code>%hist</code>用于输出历史记录（此时也可用<code>hist</code>），同时，<code>_</code>、<code>__</code>、<code>___</code>和<em><code>i</code>、</em><code>ii</code>、<code>_iii</code>变量保存最后三个输出和输入对象。<code>_n</code>和<code>_in</code>(<code>n</code>表示具体的数字)变量返回第<code>n</code>个输出和输入的历史命令（输出可选，无输出时不显示输出）。</p>
+<h3 id="9-使用pylab进行交互式计算"><a href="#9-使用pylab进行交互式计算" class="headerlink" title="9. 使用pylab进行交互式计算"></a>9. 使用pylab进行交互式计算</h3><p>对于<code>Numpy</code>和<code>matplotlib</code>中的科学计算功能，pylab命令可以使其在控制台进行交互式计算和动态绘图，对于绘图的直观影响是，不需要通过执行<code>plt.show()</code>看到输出的结果图。</p>
+<p>已经进入IPython界面，可以执行<code>%pylab</code>实现交互式，而在最开始进入IPyhton界面之前，直接输入<code>ipython --pylab</code>命令，则可以进入自动带交互式计算和绘图的IPython界面。</p>
+<h3 id="10-IPython-notebook"><a href="#10-IPython-notebook" class="headerlink" title="10. IPython notebook"></a>10. IPython notebook</h3><p>IPython notebook是一种基于WEB的交互式笔记本，它是一种基于JSON的文档格式.ipynb，可以轻松分享代码、输出结果及图片等内容。</p>
+<p>执行<code>ipython notebook</code>即可启动IPython notebook。如IPython的pylab一样，pylab既可以在运行 ipython notebook之前输入，也可以在运行ipython notebook之后输入。运行前，<code>ipython notebook --pylab=inline</code>，运行后，<code>%pylab inline</code>。</p>
+<p>同时，IPython notebook不仅可以作为一个python工具，还可以记录md文本等，完全可以作为一个笔记本使用。</p>
+<p>IPython notebook输出结果可分为两种。</p>
+<ul>
+<li><code>Ctrl+Enter</code>显示当前Cell行的运行结果</li>
+<li><code>Shift+Enter</code>运行当前Cell行所有结果并新建一个cell输入框。</li>
+</ul>
+<p><img src="/images/python-1-5.png" alt="ipython notebook"></p>
+<p>以上就是Anaconda和IPython部分的一些内容，只涉及到目前所碰到的一些内容，后续如有拓展会进行补充。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017-05-22-sql-practice/" rel="next" title="SQL实践">
+                Previous:  SQL实践 <i class="fa fa-chevron-right"></i>
+              </a>  
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/Fitz.jpg"
+               alt="Fitz.Xu" />
+          <p class="site-author-name" itemprop="name">Fitz.Xu</p>
+           
+              <p class="site-description motion-element" itemprop="description">去折腾，去尝试，去探索世界的未知</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xjmwx4" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.linkedin.com/in/xujia64" target="_blank" title="Linkedin">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  Linkedin
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/70374031" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/xjmwx4" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python版本的选择"><span class="nav-number">1.</span> <span class="nav-text">Python版本的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境IDE的选择-Anaconda"><span class="nav-number">2.</span> <span class="nav-text">开发环境IDE的选择-Anaconda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPython"><span class="nav-number">3.</span> <span class="nav-text">IPython</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-与操作系统进行交互"><span class="nav-number">3.1.</span> <span class="nav-text">1. 与操作系统进行交互</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-标准键盘命令"><span class="nav-number">3.2.</span> <span class="nav-text">2. 标准键盘命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Tab键自动补全"><span class="nav-number">3.3.</span> <span class="nav-text">3. Tab键自动补全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-内省"><span class="nav-number">3.4.</span> <span class="nav-text">4. 内省</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-run命令执行文件"><span class="nav-number">3.5.</span> <span class="nav-text">5. %run命令执行文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-执行剪贴板中的命令"><span class="nav-number">3.6.</span> <span class="nav-text">6. 执行剪贴板中的命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-计算代码运行时间：-time和-timeit"><span class="nav-number">3.7.</span> <span class="nav-text">7. 计算代码运行时间：%time和%timeit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Magic魔术命令"><span class="nav-number">3.8.</span> <span class="nav-text">8. Magic魔术命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-使用pylab进行交互式计算"><span class="nav-number">3.9.</span> <span class="nav-text">9. 使用pylab进行交互式计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-IPython-notebook"><span class="nav-number">3.10.</span> <span class="nav-text">10. IPython notebook</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fitz.Xu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
